@@ -1,17 +1,38 @@
-//instantiate express module
 const express = require('express')
 
-//use express in app variable
 const app = express()
-
-//define the server port
 const port = 5000
 
-//create the homepage route
-app.get('/', (req, res) => {
-    //res means, response, and it send string "Hello Express!" to the API
-    res.send('Hello Express!')
-})    
+//allow this app to receive incoming json request
+//Create app.use for express.json here
 
-//when this nodejs app executed, it will listen to defined port
+let todos = [
+    {
+        id: 1,
+        title: "Cuci tangan",
+        isDone: true
+    },
+    {
+        id: 2,
+        title: "Jaga jarak",
+        isDone: false
+    },
+]
+
+//GET list route: simply send arr of obj todos on your user screen
+// Create method GET here
+
+//GET detail route: send the todo obj, by received id request params
+// Create method GET by received id here
+
+//POST route: receive json body request, from user input, then push to todos array
+// Create method POST here
+
+//PATCH route: receive json body request, from user input, then push to todos array
+//by object id
+// Create method PATCH here
+
+//DELETE route: delete the todo obj, by received id request params
+// Create method DELETE here
+
 app.listen(port, () => console.log(`Listening on port ${port}!`))
