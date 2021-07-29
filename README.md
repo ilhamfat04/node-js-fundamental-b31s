@@ -1,4 +1,4 @@
-# Update query with sequelize
+# Delete query with sequelize
 
 - Controller
 
