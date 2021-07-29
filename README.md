@@ -1,4 +1,4 @@
-# Insert query with sequelize
+# Update query with sequelize
 
 - Controller
 
