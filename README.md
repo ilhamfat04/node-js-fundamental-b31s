@@ -11,21 +11,43 @@
   const { QueryTypes } = require("sequelize");
   ```
 
-  Function addUsers for insert user data to database :
+  Function getUsers for get all user data from database :
 
   ```javascript
-  exports.addUsers = async (req, res) => {
+  exports.getUsers = async (req, res) => {
     try {
-      const { email, password, name, status } = req.body;
-
-      const query = `INSERT INTO users (email,password,name,status) VALUES ('${email}','${password}','${name}','${status}')`;
-
-      await db.sequelize.query(query);
+      const query = "SELECT * FROM users";
+      const data = await db.sequelize.query(query, { type: QueryTypes.SELECT });
 
       res.send({
         status: "success",
-        message: "Add user finished",
-        query,
+        data,
+      });
+    } catch (error) {
+      console.log(error);
+      res.send({
+        status: "failed",
+        message: "Server Error",
+      });
+    }
+  };
+  ```
+
+  Function getUser for get one user data from database :
+
+  ```javascript
+  exports.getUser = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const data = await db.sequelize.query(
+        `SELECT * FROM users WHERE id = ${id}`,
+        { type: QueryTypes.SELECT }
+      );
+
+      res.send({
+        status: "success",
+        data,
       });
     } catch (error) {
       console.log(error);
@@ -41,14 +63,15 @@
 
   > File : `src/routes/index.js`
 
-  Import function addUsers from user controller :
+  Import function getUsers and getUser from user controller :
 
   ```javascript
-  const { addUsers } = require("../controllers/user");
+  const { getUsers, getUser } = require("../controllers/user");
   ```
 
-  Router with method post for insert user data :
+  Router with method get for fetching user data :
 
   ```javascript
-  router.post("/user", addUsers);
+  router.get("/users", getUsers);
+  router.get("/user/:id", getUser);
   ```
