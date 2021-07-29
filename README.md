@@ -4,28 +4,20 @@
 
   > File : `src/controllers/user.js`
 
-  Import db connection and QueryTypes from sequelize :
+  Function deleteUser for delete user data from database :
 
   ```javascript
-  const db = require("../database/connection");
-  const { QueryTypes } = require("sequelize");
-  ```
-
-  Function addUsers for insert user data to database :
-
-  ```javascript
-  exports.addUsers = async (req, res) => {
+  exports.deleteUser = async (req, res) => {
     try {
-      const { email, password, name, status } = req.body;
+      const { id } = req.params;
 
-      const query = `INSERT INTO users (email,password,name,status) VALUES ('${email}','${password}','${name}','${status}')`;
+      const query = `DELETE FROM users WHERE id = ${id}`;
 
       await db.sequelize.query(query);
 
       res.send({
         status: "success",
-        message: "Add user finished",
-        query,
+        message: `Delete user id: ${id} finished`,
       });
     } catch (error) {
       console.log(error);
@@ -41,14 +33,14 @@
 
   > File : `src/routes/index.js`
 
-  Import function addUsers from user controller :
+  Import function deleteUser from user controller :
 
   ```javascript
-  const { addUsers } = require("../controllers/user");
+  const { ... , deleteUser } = require("../controllers/user");
   ```
 
-  Router with method post for insert user data :
+  Router with method delete for delete user data :
 
   ```javascript
-  router.post("/user", addUsers);
+  router.patch("/user/:id", deleteUser);
   ```
