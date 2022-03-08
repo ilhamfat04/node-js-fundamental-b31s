@@ -12,6 +12,8 @@ const {
 } = require("../controllers/todo");
 // Get addUser controller user here ...
 
+const { addUser } = require('../controllers/user')
+
 // Route
 router.get("/todos", getTodos);
 router.get("/todo/:id", getTodo);
@@ -20,5 +22,6 @@ router.patch("/todo/:id", updateTodo);
 router.delete("/todo/:id", deleteTodo);
 
 // Create Route for add user here ...
+router.post("/user", addUser);
 
 module.exports = router;
