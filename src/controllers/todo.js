@@ -17,6 +17,22 @@ let todos = [
 ]
 
 // Create controller get Todos here
+exports.getTodos = async (req, res) => {
+    try {
+        res.send({
+            status: 'success',
+            data: {
+                todos
+            }
+        })
+
+    } catch (error) {
+        res.send({
+            status: 'failed',
+            message: 'server error'
+        })
+    }
+}
 
 // Create controller get Todo by received id here
 
